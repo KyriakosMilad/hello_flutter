@@ -28,27 +28,32 @@ class _MyAppState extends State<_MyApp> {
 
   void answerQuestion() {
     setState(() {
-      if ((_currentQuestion + 1) <= (_questions.length - 1)) {
-        _currentQuestion = _currentQuestion + 1;
-      }
+      // if (_currentQuestion < _questions.length - 1) {
+      _currentQuestion = _currentQuestion + 1;
+      // }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('hello_flutter'),
-        ),
-        body: Column(
-          children: [
-            Question(_questions[_currentQuestion]['question'] as String),
-            ...(_questions[_currentQuestion]['answers'] as List<String>)
-                .map((e) => Answer(e, answerQuestion))
-          ],
-        ),
+        home: Scaffold(
+      appBar: AppBar(
+        title: const Text('hello_flutter'),
       ),
-    );
+      body: _currentQuestion < _questions.length
+          ? Column(
+              children: [
+                Question(_questions[_currentQuestion]['question'] as String),
+                ...(_questions[_currentQuestion]['answers'] as List<String>)
+                    .map((e) => Answer(e, answerQuestion))
+              ],
+            )
+          : Center(
+              child: Text(
+              'Done!',
+              textAlign: TextAlign.center,
+            )),
+    ));
   }
 }
