@@ -2,7 +2,14 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
   var questions = [
     'Who is the founder of modern Egypt?',
     'Who is the founder of Egypt and first country in history?',
@@ -11,8 +18,11 @@ class MyApp extends StatelessWidget {
   var currentQuestion = 0;
 
   void answerQuestion() {
-    currentQuestion = currentQuestion + 1;
-    print(questions[currentQuestion]);
+    setState(() {
+      if ((currentQuestion + 1) <= (questions.length - 1)) {
+       currentQuestion = currentQuestion + 1;
+      }
+    });
   }
 
   @override
@@ -24,7 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         body: Column(
           children: [
-            Text(questions[0]),
+            Text(questions[currentQuestion]),
             ElevatedButton(
               child: Text('Al Sisi'),
               onPressed: answerQuestion,
