@@ -27,10 +27,16 @@ class _MyAppState extends State<_MyApp> {
   ];
 
   int _currentQuestion = 0;
-
   int _rightAnswersCount = 0;
 
-  void answerQuestion(int questionNumber, String answer) {
+  void _resetQuiz() {
+    setState(() {
+      _currentQuestion = 0;
+      _rightAnswersCount = 0;
+    });
+  }
+
+  void _answerQuestion(int questionNumber, String answer) {
     setState(() {
       if (_questions[questionNumber]['rightAnswer'] == answer) {
         _rightAnswersCount++;
@@ -47,8 +53,8 @@ class _MyAppState extends State<_MyApp> {
         title: const Text('hello_flutter'),
       ),
       body: _currentQuestion < _questions.length
-          ? Quiz(_questions, _currentQuestion, answerQuestion)
-          : Result(((_rightAnswersCount / _questions.length) * 100).toString()),
+          ? Quiz(_questions, _currentQuestion, _answerQuestion)
+          : Result(((_rightAnswersCount / _questions.length) * 100).toString(), _resetQuiz),
     ));
   }
 }
