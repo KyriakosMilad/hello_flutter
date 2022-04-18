@@ -13,7 +13,7 @@ class _MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<_MyApp> {
-   var _questions = [
+  static const _questions = [
     {
       'question' : 'Who is the founder of modern Egypt?',
       'answers': ['Al-Sadat', 'Al-Sisi', 'Mohammed Ali', 'Abdel-Naser'],
@@ -39,11 +39,11 @@ class _MyAppState extends State<_MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('hello_flutter'),
+          title: const Text('hello_flutter'),
         ),
         body: Column(
           children: [
-            Question(_questions[_currentQuestion]['question']),
+            Question(_questions[_currentQuestion]['question'] as String),
             ...(_questions[_currentQuestion]['answers'] as List<String>).map((e) => Answer(e, answerQuestion))
           ],
         ),
