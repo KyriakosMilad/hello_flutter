@@ -13,9 +13,15 @@ class _MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<_MyApp> {
-  var _questions = [
-    'Who is the founder of modern Egypt?',
-    'Who is the founder of Egypt and first country in history?',
+   var _questions = [
+    {
+      'question' : 'Who is the founder of modern Egypt?',
+      'answers': ['Al-Sadat', 'Al-Sisi', 'Mohammed Ali', 'Abdel-Naser'],
+    },
+    {
+      'question': 'Who is the founder of Egypt and first country in history?',
+      'answers': ['Narmer', 'Ramses II', 'Thotmose III', 'Amenhotep'],
+    },
   ];
 
   var _currentQuestion = 0;
@@ -37,10 +43,8 @@ class _MyAppState extends State<_MyApp> {
         ),
         body: Column(
           children: [
-            Question(_questions[_currentQuestion]),
-            Answer('Al Sisi', answerQuestion),
-            Answer('Narmer', answerQuestion),
-            Answer('Ramses II', answerQuestion),
+            Question(_questions[_currentQuestion]['question']),
+            ...(_questions[_currentQuestion]['answers'] as List<String>).map((e) => Answer(e, answerQuestion))
           ],
         ),
       ),
