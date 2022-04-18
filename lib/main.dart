@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:hello_flutter/question.dart';
-import 'package:hello_flutter/answer.dart';
+import 'package:hello_flutter/quiz.dart';
+import 'package:hello_flutter/result.dart';
 
 void main() => runApp(_MyApp());
 
@@ -42,18 +42,8 @@ class _MyAppState extends State<_MyApp> {
         title: const Text('hello_flutter'),
       ),
       body: _currentQuestion < _questions.length
-          ? Column(
-              children: [
-                Question(_questions[_currentQuestion]['question'] as String),
-                ...(_questions[_currentQuestion]['answers'] as List<String>)
-                    .map((e) => Answer(e, answerQuestion))
-              ],
-            )
-          : Center(
-              child: Text(
-              'Done!',
-              textAlign: TextAlign.center,
-            )),
+          ? Quiz(_questions, _currentQuestion, answerQuestion)
+          : Result(),
     ));
   }
 }
