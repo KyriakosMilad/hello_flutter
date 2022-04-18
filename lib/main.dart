@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: Text('hello_flutter'),
         ),
+        body: Text('hi from body'),
       ),
     );
   }
