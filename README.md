@@ -1,6 +1,6 @@
 # hello_flutter
 
-A new Flutter project.
+My first flutter app; it's a simple quiz app.
 
 ## Getting Started
 
