@@ -17,20 +17,25 @@ class _MyAppState extends State<_MyApp> {
     {
       'question': 'Who is the founder of modern Egypt?',
       'answers': ['Al-Sadat', 'Al-Sisi', 'Mohammed Ali', 'Abdel-Naser'],
+      'rightAnswer': 'Al-Sisi',
     },
     {
       'question': 'Who is the founder of Egypt and first country in history?',
       'answers': ['Narmer', 'Ramses II', 'Thotmose III', 'Amenhotep'],
+      'rightAnswer': 'Narmer',
     },
   ];
 
-  var _currentQuestion = 0;
+  int _currentQuestion = 0;
 
-  void answerQuestion() {
+  int _rightAnswersCount = 0;
+
+  void answerQuestion(int questionNumber, String answer) {
     setState(() {
-      // if (_currentQuestion < _questions.length - 1) {
+      if (_questions[questionNumber]['rightAnswer'] == answer) {
+        _rightAnswersCount++;
+      }
       _currentQuestion = _currentQuestion + 1;
-      // }
     });
   }
 
@@ -43,7 +48,7 @@ class _MyAppState extends State<_MyApp> {
       ),
       body: _currentQuestion < _questions.length
           ? Quiz(_questions, _currentQuestion, answerQuestion)
-          : Result(),
+          : Result(((_rightAnswersCount / _questions.length) * 100).toString()),
     ));
   }
 }
